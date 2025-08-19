@@ -1,18 +1,16 @@
-# Gunakan Python 3.11 slim
+# Gunakan image Python slim
 FROM python:3.11-slim
 
-# Set working directory
+# Set working directory di container
 WORKDIR /app
 
-# Copy requirements dan install
+# Copy dan install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy semua file project
+# Copy semua file aplikasi
 COPY . .
 
-# Expose port yang digunakan Easypanel
-EXPOSE 8080
-
-# Jalankan server pakai gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+# Jalankan Flask pakai Gunicorn (lebih stabil di container)
+# Bind ke port 8000
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
