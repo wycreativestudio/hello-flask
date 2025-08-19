@@ -3,8 +3,9 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
-def home():
-    return "<h1>Hello World 🚀</h1><p>Web server Flask pertama kamu sudah jalan!</p>"
+def hello():
+    return "Hello World!"
 
 if __name__ == "__main__":
+    # Hanya dipakai kalau jalan lokal (bukan di container production)
     app.run(host="0.0.0.0", port=8080)
